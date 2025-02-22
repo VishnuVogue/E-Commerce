@@ -14,6 +14,10 @@ function Collection() {
     setFilterProducts(products);
   },[])
 
+  const sortProduct = () => {
+
+  }
+
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
 
@@ -43,21 +47,27 @@ function Collection() {
 
         {/* Sub category filter */}
 
-        {/* <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block `}>
-          <p className='mb-3 text-sm font-medium'>TYPE</p>
+        <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block `}>
+          <p className='mb-3 text-sm font-medium'>THEME</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={''}/>Men
+              <input className='w-3' type="checkbox" value={''}/>Dragon Ball
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={''}/>Women
+              <input className='w-3' type="checkbox" value={''}/>One Piece
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={''}/>Unisex
+              <input className='w-3' type="checkbox" value={''}/>Naruto
+            </p>
+            <p className='flex gap-2'>
+              <input className='w-3' type="checkbox" value={''}/>Bleach
+            </p>
+            <p className='flex gap-2'>
+              <input className='w-3' type="checkbox" value={''}/>Berserk
             </p>
 
           </div>
-        </div> */}
+        </div>
 
       </div>
 
@@ -77,7 +87,7 @@ function Collection() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
               {
                 filterProducts.map((item,index)=>(
-                  <ProductItems value={index} name={item.name} id={item. id} price={item.price} image={item.image} />
+                  <ProductItems key={index} name={item.name} id={item._id} price={item.price} image={item.image} />
                 ))
               }
             </div>
