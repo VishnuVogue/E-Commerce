@@ -17,10 +17,15 @@ connectCloudinary()
 //middleware
 app.use(express.json())
 app.use(cors({
-    origin: "*", // Allow only your frontend
+    origin: "https://e-commerce-26eb.vercel.app", // Allow only your frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization", "token"], // Add 'token' here
+    credentials: true
 }));
+
+// Handle Preflight (OPTIONS) requests
+app.options("*", cors());
+
 
 //api endpoints
 app.use('/api/user',userRouter)
