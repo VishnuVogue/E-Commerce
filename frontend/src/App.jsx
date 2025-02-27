@@ -17,6 +17,7 @@ import Footer from './Components/Footer'
 
 import { ToastContainer, toast } from 'react-toastify';
 import Verify from './Pages/Verify'
+import Term from './Pages/Term'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path='/product/:productId' element={<Product/>} />
         <Route path='/Contact' element={<Contact/>} />
         <Route path='/verify' element={<Verify/>} />
+        <Route path='/term' element={<Term/>} />
       </Routes>
       <Footer></Footer>
     </div>
