@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
+  "proxy": "https://e-commerce-1vzp-qudb151jq-mahato-deepaks-projects.vercel.app",
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js"
