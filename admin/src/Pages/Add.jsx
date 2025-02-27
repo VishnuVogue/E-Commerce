@@ -16,12 +16,24 @@ const Add = ({token}) => {
   const [description,setDescription] = useState("");
   const [price,setPrice] = useState('');
   const [category,setCategory] = useState('Men');
-  // Const [subCategory,setSubCategory] = useState('');
+  const [subCategory,setSubCategory] = useState('Dragon ball');
   const [bestseller,setBestseller] = useState(false);
   const [sizes,setSizes] = useState([]);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+
+    if (!name || !description || !price || (image1 === null && image2 === null && image3 === null && image4 === null)) {
+      toast.error('Please fill in all required fields and upload at least one image.');
+      return;
+    }
+    
+    // Ensure that subCategory is selected
+    if (!subCategory) {
+      toast.error('Please select a sub-category.');
+      return;
+    }
+  
     try {
       
       const formdata = new FormData()
@@ -30,7 +42,7 @@ const Add = ({token}) => {
       formdata.append("description",description)
       formdata.append("price",price)
       formdata.append("category",category)
-      // formdata.append("subCategory",subCategory)
+      formdata.append("subCategory",subCategory)
       formdata.append("bestseller",bestseller)
       formdata.append("sizes",JSON.stringify(sizes))
 
@@ -50,6 +62,9 @@ const Add = ({token}) => {
         setImage3(false);
         setImage4(false);
         setPrice('');
+        setSizes([]);
+        setBestseller(false);
+
       } else {
         toast.error(response.data.message)
       }
@@ -109,10 +124,9 @@ const Add = ({token}) => {
           <div>
             <p className='mb-2'>Sub category</p>
             {/* onChange={(e)=>setSubCategory(e.target.value)} value={subCategory} */}
-            <select  className='w-full px-3 py-2' name="" id="">
+            <select onChange={(e)=>setSubCategory(e.target.value)} value={subCategory} className='w-full px-3 py-2' name="" id="">
               <option value="Dragon Ball">Dragon Ball</option>
               <option value="One Piece">One Piece</option>
-              <option value="Bleach">Bleach</option>
               <option value="Naruto">Naruto</option>
             </select>
           </div>

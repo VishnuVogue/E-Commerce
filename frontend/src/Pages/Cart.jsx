@@ -7,6 +7,7 @@ import CartTotal from '../Components/CartTotal';
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, navigate, addOrder } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
+  
 
   useEffect(() => {
     const tempData = [];
@@ -23,7 +24,7 @@ const Cart = () => {
     }
 
     setCartData(tempData);
-  }, [cartItems]);
+  }, [cartItems,products]);
 
   return (
     <div className="pt-14 border-t">
@@ -46,7 +47,7 @@ const Cart = () => {
             >
               <div className="flex items-start gap-6">
                 <img
-                  src={productData.image[0]}
+                  src={productData.images[0]}
                   alt=""
                   className="w-16 sm:w-20"
                 />
