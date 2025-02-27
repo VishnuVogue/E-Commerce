@@ -17,7 +17,7 @@ connectCloudinary()
 //middleware
 app.use(express.json())
 app.use(cors({
-    origin: ["https://e-commerce-26eb.vercel.app","https://e-commerce-1vzp.vercel.app"], // Allow only your frontend
+    origin: ["https://e-commerce-26eb.vercel.app","https://e-commerce-1vzp.vercel.app/"], // Allow only your frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "token"], // Add 'token' here
     credentials: true
