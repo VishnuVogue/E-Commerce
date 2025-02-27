@@ -16,21 +16,24 @@ connectCloudinary();
 
 // Allowed Origins (Frontend & Admin Panel)
 const allowedOrigins = [
-    'https://e-commerce-1vzp-qudb151jq-mahato-deepaks-projects.vercel.app',
-    'https://e-commerce-26eb-h8og6z0ev-mahato-deepaks-projects.vercel.app' // Replace with actual admin URL
+    'https://e-commerce-1vzp-qudb151jq-mahato-deepaks-projects.vercel.app', 
+    'https://e-commerce-26eb-h8og6z0ev-mahato-deepaks-projects.vercel.app' // Admin Panel
 ];
 
 // CORS Middleware
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true
-}));
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+    }
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    next();
+});
 
 // Middleware
 app.use(express.json());
@@ -46,12 +49,9 @@ app.get("/", (req, res) => {
     res.send("API WORKING");
 });
 
-// Handle Unauthorized Access (401 Errors)
+// Error Handling
 app.use((err, req, res, next) => {
-    if (err.message === 'Not allowed by CORS') {
-        return res.status(403).json({ error: 'CORS Policy: Access denied' });
-    }
-    res.status(500).json({ error: err.message });
+    res.status(err.status || 500).json({ error: err.message });
 });
 
 // Start Server
