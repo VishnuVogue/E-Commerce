@@ -16,10 +16,7 @@ const port = process.env.PORT || 4000;
 connectDB();
 connectCloudinary();
 
-// Middleware
-app.use(express.json());
-
-// ✅ CORS Configuration
+// ✅ CORS Configuration - Must be BEFORE routes
 const allowedOrigins = [
     "https://e-commerce-1vzp.vercel.app",
     "https://e-commerce-26eb.vercel.app"
@@ -46,14 +43,18 @@ app.use((req, res, next) => {
     }
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, token");
+    res.header("Access-Control-Allow-Credentials", "true");
 
     if (req.method === "OPTIONS") {
-        return res.status(200).end();
+        return res.sendStatus(204);
     }
     next();
 });
 
-// API Endpoints
+// Middleware
+app.use(express.json());
+
+// ✅ Define API Routes AFTER CORS Middleware
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
@@ -65,5 +66,5 @@ app.get("/", (req, res) => {
 
 // Start Server
 app.listen(port, () => {
-    console.log("Server started on PORT: " + port);
+    console.log(`✅ Server started on PORT: ${port}`);
 });
