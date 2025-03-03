@@ -26,6 +26,6 @@
     "serverless-http": "^2.7.0"
   },
   "devDependencies": {
-    "vercel": "^23.0.0" // Install vercel CLI for local testing and deployment
+    "vercel": "^23.0.0" 
   }
 }
