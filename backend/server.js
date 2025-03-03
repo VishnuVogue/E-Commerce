@@ -19,7 +19,8 @@ connectCloudinary();
 // ✅ CORS Configuration - Must be BEFORE routes
 const allowedOrigins = [
     "https://e-commerce-1vzp.vercel.app",
-    "https://e-commerce-26eb.vercel.app"
+    "https://e-commerce-26eb.vercel.app",
+    "http://localhost:5173"
 ];
 
 app.use(cors({
