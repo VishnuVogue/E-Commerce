@@ -7,7 +7,6 @@ import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 import cartRouter from "./routes/cartRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
-import serverless from "serverless-http";
 
 // App Config
 const app = express();
@@ -20,8 +19,7 @@ connectCloudinary();
 // ✅ CORS Configuration - Must be BEFORE routes
 const allowedOrigins = [
     "https://e-commerce-1vzp.vercel.app",
-    "https://e-commerce-26eb.vercel.app",
-    "http://localhost:5173",  // Add localhost for local dev
+    "https://e-commerce-26eb.vercel.app"
 ];
 
 app.use(cors({
@@ -48,7 +46,7 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
 
     if (req.method === "OPTIONS") {
-        return res.sendStatus(204);  // Respond with status 204 for OPTIONS preflight
+        return res.sendStatus(204);
     }
     next();
 });
@@ -62,11 +60,11 @@ app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
-// Simple route to check API status
 app.get("/", (req, res) => {
     res.send("API WORKING");
 });
 
-// Wrap the Express app with serverless-http for Vercel
-export const handler = serverless(app);
-
+// Start Server
+app.listen(port, () => {
+    console.log(✅ Server started on PORT: ${port});
+});
